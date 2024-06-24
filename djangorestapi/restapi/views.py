@@ -18,10 +18,30 @@ def getuserdetails(request):
         }
     )
 
-# @api_view(['POST'])
-# def postuserdetails(request):
+@api_view(['POST'])
+def postuserdetails(request):
+    data = request.data
+    # error = UserDetailsSerializer.error
+    print(data)
+    userserializer = UserDetailsSerializer(data=data, many= True)
 
-#     return Response()
+    if userserializer.is_valid():
+        userserializer.save()
+        print(userserializer.data)
+
+        return Response ({
+            'status':True,
+            'message':'Get api hit !',
+            'data': userserializer.data
+            
+        })
+    
+    else:
+        return Response ({
+            'status':False,
+            'message':'Something went wrong !',
+        })
+
 
 
 
