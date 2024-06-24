@@ -6,5 +6,5 @@ from restapi import urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', urls.restapi, )
+    path('',include('restapi.urls') )
 ]
