@@ -20,14 +20,15 @@ def getuserdetails(request):
 
 @api_view(['POST'])
 def postuserdetails(request):
-    data = request.data
+    try:
+        data = request.data
     # error = UserDetailsSerializer.error
-    print(data)
-    userserializer = UserDetailsSerializer(data=data, many= True)
+        print(data)
+        userserializer = UserDetailsSerializer(data=data, many= True)
 
-    if userserializer.is_valid():
-        userserializer.save()
-        print(userserializer.data)
+        if userserializer.is_valid():
+            userserializer.save()
+            print(userserializer.data)
 
         return Response ({
             'status':True,
@@ -36,11 +37,13 @@ def postuserdetails(request):
             
         })
     
-    else:
-        return Response ({
+    except Exception as e:
+            print(e)
+            return Response ({
             'status':False,
             'message':'Something went wrong !',
         })
+
 
 
 
